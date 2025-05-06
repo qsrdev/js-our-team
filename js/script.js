@@ -34,6 +34,7 @@ const teamMembers = [
     role: "Analyst",
     email: "danielaamet@team.com",
     img: "img/female3.png",
+    pizza: "ciaooo",
   },
 ];
 
@@ -42,29 +43,50 @@ const teamMembers = [
 /// le assegna il valore fatto da cardcreation
 
 const teamMembersElement = document.querySelector(".team-container");
-console.log(teamMembersElement);
+
+const formElement = document.getElementById("submitform");
 
 const cardCreation = (member) => {
   const { name, role, email, img } = member;
 
   return `<div class="team-card">
-          <img src="${img}" alt="Marta" />
-          <div class="info">
-          <h3>${name}</h3>
-          <p>${role}</p>
-          <a href="mailto:${email}">${email}</a>
-          </div>
-        </div>`;
+  <img src="${img}" alt="Marta" />
+  <div class="info">
+  <h3>${name}</h3>
+  <p>${role}</p>
+  <a href="mailto:${email}">${email}</a>
+  </div>
+  </div>`;
 };
 
 const renderTeam = (arrayTeam) => {
   let cards = "";
   for (const member of arrayTeam) {
-    console.log(member);
+    // console.log(member);
     cards += cardCreation(member);
-    console.log(cards);
+    // console.log(cards);
   }
   return cards;
 };
 
 teamMembersElement.innerHTML = renderTeam(teamMembers);
+
+formElement.addEventListener("submit", (e) => {
+  event.preventDefault();
+  console.log("submit");
+  const name = document.getElementById("exampleInputName").value;
+  const role = document.getElementById("exampleInputRole").value;
+  const email = document.getElementById("exampleInputMail").value;
+  const img = document.getElementById("exampleInputImg").value;
+  console.log(name, role, email, img);
+
+  const newMember = {
+    name,
+    role,
+    email,
+    img,
+  };
+  console.log(newMember);
+  teamMembers.push(newMember);
+  teamMembersElement.innerHTML = renderTeam(teamMembers);
+});

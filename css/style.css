@@ -5,6 +5,11 @@
   list-style: none;
 }
 
+h1,
+p {
+  text-align: center;
+}
+
 .team-container {
   display: flex;
   flex-wrap: wrap;
